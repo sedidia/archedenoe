@@ -1,6 +1,5 @@
 "use client";
-
-import 'bootstrap/dist/css/bootstrap.min.css';
+import Link from 'next/link';
 import React, { useEffect } from 'react';
 import Head from 'next/head';
 
@@ -77,8 +76,12 @@ const HomePage = () => {
           <h1 className="display-3 fw-bold mb-3">Chanter, c'est prier deux fois</h1>
           <p className="lead mb-4">L'ensemble vocal Arche de Noé vous invite à découvrir l'harmonie des voix et du cœur.</p>
           <div className="d-grid gap-2 d-sm-flex justify-content-sm-center">
-            <button type="button" className="btn btn-primary btn-lg px-4 gap-3">Prochains Concerts</button>
-            <button type="button" className="btn btn-outline-light btn-lg px-4">Écouter nos chants</button>
+            <Link href={"/prochainsconcerts"} className="btn btn-primary btn-lg px-4 gap-3">
+              Prochains Concerts
+            </Link>
+            <Link href={"/chantsvideos"} className="btn btn-outline-light btn-lg px-4">
+              Écouter nos chants
+            </Link>
           </div>
         </div>
       </header>
