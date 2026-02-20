@@ -112,14 +112,14 @@ const HomePage = () => {
         </div>
       </nav>
 
-      {/* --- HERO SECTION --- */}
+      {/* --- ARCHE SECTION --- */}
       <header className="relative h-[80vh] flex items-center justify-center text-center text-white overflow-hidden">
         <div className="absolute inset-0 z-0">
             <div className="absolute inset-0 bg-blue-900/60 z-10"></div>
             <img 
-                src="https://images.unsplash.com/photo-1514320298574-255903965a45?q=80&w=1600" 
+                src="https://res.cloudinary.com/archedenoe/image/upload/v1771585361/moment_posters/g1p9qgajo1kn5gdx0fxw.jpg" 
                 className="w-full h-full object-cover" 
-                alt="Chorale Hero"
+                alt="Chorale Arche de Noé"
             />
         </div>
         
