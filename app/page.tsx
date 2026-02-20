@@ -2,6 +2,13 @@
 
 import Link from 'next/link';
 import React, { useState, useEffect } from 'react';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { Navigation, Pagination, Autoplay, EffectCoverflow } from 'swiper/modules';
+
+import 'swiper/css';
+import 'swiper/css/navigation';
+import 'swiper/css/pagination';
+import 'swiper/css/effect-coverflow';
 
 interface Moment {
   _id: string;
@@ -15,9 +22,16 @@ const HomePage = () => {
   const [moments, setMoments] = useState<Moment[]>([]);
   const [loading, setLoading] = useState(true);
 
+  // Fermer le menu si on redimensionne l'écran au delà du mobile
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth >= 1024) setIsOpen(false);
+    };
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
 
   useEffect(() => {
-    // 1. Chargement sécurisé de Bootstrap (Client-side uniquement)
     const loadJS = async () => {
       if (typeof window !== 'undefined') {
         try {
@@ -29,55 +43,43 @@ const HomePage = () => {
     };
     loadJS();
 
-    // 2. Mise à jour du titre (SEO pour composant client)
     document.title = "Arche de Noé | Chorale Vocale";
 
-    // 3. Récupération des données
     const fetchMoments = async () => {
       try {
         const res = await fetch('/api/moments');
         const result = await res.json();
-        
-        // On vérifie si les données sont dans result.data ou result directement
         const cleanData = result.data || result;
-        
-        if (Array.isArray(cleanData)) {
-          setMoments(cleanData);
-        } else {
-          setMoments([]);
-        }
+        if (Array.isArray(cleanData)) setMoments(cleanData);
       } catch (error) {
         console.error('Erreur lors de la récupération des moments:', error);
       } finally {
         setLoading(false);
       }
     };
-
     fetchMoments();
   }, []);
 
   return (
-    <div className="min-h-screen bg-white">
-      {/* --- NAVIGATION --- */}
-      <nav className="bg-blue-600 sticky top-0 z-50 shadow-md">
+    <div className="min-h-screen bg-white font-sans">
+      {/* --- NAVIGATION (Thème Bleu/Rouge/Blanc) --- */}
+      <nav className="bg-blue-800 sticky top-0 z-[100] shadow-xl border-b-4 border-red-600">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between h-16 items-center">
-            
+          <div className="flex justify-between h-20 items-center">
             <div className="flex-shrink-0">
-              <Link href="/" className="text-white font-bold text-xl tracking-wider text-decoration-none">
-                ARCHE DE NOÉ
+              <Link href="/" className="text-white font-black text-2xl tracking-tighter no-underline flex items-center gap-2">
+                <span className="bg-red-600 px-2 py-1 rounded">ARCHE</span> DE NOÉ
               </Link>
             </div>
 
             {/* Menu Desktop */}
             <div className="hidden lg:block">
-              <ul className="flex space-x-8 items-center list-unstyled mb-0">
-                <li><a href="#a-propos" className="text-white text-decoration-none hover:text-blue-200">À Propos</a></li>
-                <li><a href="#pupitres" className="text-white text-decoration-none hover:text-blue-200">Nos Pupitres</a></li>
-                <li><a href="#galerie" className="text-white text-decoration-none hover:text-blue-200">Galerie</a></li>
+              <ul className="flex space-x-8 items-center list-none mb-0">
+                <li><a href="#pupitres" className="text-white no-underline hover:text-red-400 transition-colors font-bold uppercase text-sm tracking-widest">Nos Voix</a></li>
+                <li><a href="#galerie" className="text-white no-underline hover:text-red-400 transition-colors font-bold uppercase text-sm tracking-widest">Galerie</a></li>
                 <li>
-                  <a href="#contact" className="bg-yellow-400 hover:bg-yellow-500 text-blue-900 px-4 py-2 rounded-lg font-bold text-decoration-none shadow-sm">
-                    Nous rejoindre
+                  <a href="#contact" className="bg-red-600 hover:bg-white hover:text-red-600 text-white px-6 py-2 rounded-full font-black no-underline transition-all transform hover:scale-105 shadow-lg border-2 border-transparent hover:border-red-600">
+                    REJOINDRE LA CHORALE
                   </a>
                 </li>
               </ul>
@@ -85,50 +87,54 @@ const HomePage = () => {
 
             {/* Bouton Hamburger */}
             <div className="lg:hidden flex items-center">
-              <button
-                onClick={() => setIsOpen(!isOpen)}
-                type="button"
-                className="text-white p-2 focus:outline-none"
+              <button 
+                onClick={() => setIsOpen(!isOpen)} 
+                className="text-white p-2 focus:outline-none transition-transform active:scale-90"
+                aria-label="Toggle menu"
               >
-                <div className="relative w-6 h-6">
-                  <span className={`absolute block w-6 h-0.5 bg-current transition-all duration-300 ${isOpen ? 'rotate-45 top-3' : 'top-1'}`}></span>
-                  <span className={`absolute block w-6 h-0.5 bg-current transition-all duration-300 top-3 ${isOpen ? 'opacity-0' : 'opacity-100'}`}></span>
-                  <span className={`absolute block w-6 h-0.5 bg-current transition-all duration-300 ${isOpen ? '-rotate-45 top-3' : 'top-5'}`}></span>
+                <div className="relative w-6 h-5">
+                  <span className={`absolute block w-6 h-1 bg-white rounded-full transition-all duration-300 ${isOpen ? 'rotate-45 top-2' : 'top-0'}`}></span>
+                  <span className={`absolute block w-6 h-1 bg-white rounded-full transition-all duration-300 top-2 ${isOpen ? 'opacity-0' : 'opacity-100'}`}></span>
+                  <span className={`absolute block w-6 h-1 bg-white rounded-full transition-all duration-300 ${isOpen ? '-rotate-45 top-2' : 'top-4'}`}></span>
                 </div>
               </button>
             </div>
           </div>
         </div>
 
-        {/* Menu Mobile */}
-        <div className={`lg:hidden overflow-hidden transition-all duration-300 ${isOpen ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'}`}>
-          <div className="px-4 pt-2 pb-6 space-y-2 bg-blue-700 shadow-inner">
-            <a href="#a-propos" onClick={() => setIsOpen(false)} className="block text-white py-2 text-decoration-none">À Propos</a>
-            <a href="#pupitres" onClick={() => setIsOpen(false)} className="block text-white py-2 text-decoration-none">Nos Pupitres</a>
-            <a href="#galerie" onClick={() => setIsOpen(false)} className="block text-white py-2 text-decoration-none">Galerie</a>
-            <a href="#contact" onClick={() => setIsOpen(false)} className="block text-yellow-400 font-bold py-2 text-decoration-none border-top border-blue-500 mt-2">Nous rejoindre</a>
+        {/* Menu Mobile (Slide Down) */}
+        <div className={`lg:hidden absolute w-full bg-blue-900 border-b-4 border-red-600 transition-all duration-300 ease-in-out overflow-hidden ${isOpen ? 'max-h-64 opacity-100' : 'max-h-0 opacity-0'}`}>
+          <div className="px-4 py-6 space-y-4">
+            <a href="#pupitres" onClick={() => setIsOpen(false)} className="block text-white no-underline font-bold text-lg hover:text-red-400">Nos Voix</a>
+            <a href="#galerie" onClick={() => setIsOpen(false)} className="block text-white no-underline font-bold text-lg hover:text-red-400">Galerie</a>
+            <a href="#contact" onClick={() => setIsOpen(false)} className="block bg-red-600 text-white text-center py-3 rounded-lg font-black no-underline">REJOINDRE LA CHORALE</a>
           </div>
         </div>
       </nav>
 
       {/* --- HERO SECTION --- */}
-      <header className="py-5 text-center bg-dark text-white" 
-        style={{ 
-          backgroundImage: 'linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url("https://images.unsplash.com/photo-1514320298574-255903965a45?q=80&w=1200")', 
-          backgroundSize: 'cover', 
-          backgroundPosition: 'center', 
-          minHeight: '60vh', 
-          display: 'flex', 
-          alignItems: 'center' 
-        }}>
-        <div className="container py-5">
-          <h1 className="display-3 fw-bold mb-3">Chanter, c'est prier deux fois</h1>
-          <p className="lead mb-4">L'ensemble vocal Arche de Noé vous invite à découvrir l'harmonie des voix et du cœur.</p>
-          <div className="d-grid gap-2 d-sm-flex justify-content-sm-center">
-            <Link href="/prochainsconcerts" className="btn btn-primary btn-lg px-4 shadow">
+      <header className="relative h-[80vh] flex items-center justify-center text-center text-white overflow-hidden">
+        <div className="absolute inset-0 z-0">
+            <div className="absolute inset-0 bg-blue-900/60 z-10"></div>
+            <img 
+                src="https://images.unsplash.com/photo-1514320298574-255903965a45?q=80&w=1600" 
+                className="w-full h-full object-cover" 
+                alt="Chorale Hero"
+            />
+        </div>
+        
+        <div className="container relative z-20 px-4">
+          <h1 className="text-5xl md:text-8xl font-black mb-6 drop-shadow-2xl">
+            CHANTER, C'EST <br/><span className="text-red-600 bg-white px-4">PRIER DEUX FOIS</span>
+          </h1>
+          <p className="text-xl md:text-2xl mb-10 max-w-2xl mx-auto font-medium text-white drop-shadow">
+            L'ensemble vocal <span className="text-red-500 font-bold">Arche de Noé</span> de Lubumbashi.
+          </p>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <Link href="/prochainsconcerts" className="bg-red-600 hover:bg-red-700 text-white px-8 py-4 rounded-full font-black text-lg transition-all no-underline shadow-xl">
               Prochains Concerts
             </Link>
-            <Link href="/chantsvideos" className="btn btn-outline-light btn-lg px-4">
+            <Link href="/chantsvideos" className="bg-white text-blue-900 hover:bg-gray-100 px-8 py-4 rounded-full font-black text-lg transition-all no-underline shadow-xl">
               Écouter nos chants
             </Link>
           </div>
@@ -136,74 +142,161 @@ const HomePage = () => {
       </header>
 
       {/* --- SECTION PUPITRES --- */}
-      <section id="pupitres" className="py-5 bg-light">
+      <section id="pupitres" className="py-24 bg-white">
         <div className="container">
-          <h2 className="text-center mb-5 fw-bold">Nos Voix</h2>
-          <div className="row g-4 text-center">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl font-black text-blue-900 mb-4 uppercase italic">Nos Voix</h2>
+            <div className="w-24 h-2 bg-red-600 mx-auto"></div>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
             {[
-              { role: "Sopranos", desc: "Les voix les plus aiguës, apportant éclat et mélodie." },
-              { role: "Altos", desc: "La richesse et la profondeur des voix moyennes féminines." },
-              { role: "Ténors", desc: "La puissance et la chaleur des voix aiguës masculines." },
-              { role: "Basses", desc: "L'assise et la fondation de notre harmonie vocale." }
+              { role: "Sopranos", icon: "🎶", desc: "Les voix les plus aiguës, apportant éclat et mélodie." },
+              { role: "Altos", icon: "✨", desc: "La richesse et la profondeur des voix moyennes féminines." },
+              { role: "Ténors", icon: "🔥", desc: "La puissance et la chaleur des voix aiguës masculines." },
+              { role: "Basses", icon: "⚓", desc: "L'assise et la fondation de notre harmonie vocale." }
             ].map((p, idx) => (
-              <div key={idx} className="col-md-3">
-                <div className="card h-100 shadow-sm border-0">
-                  <div className="card-body py-4">
-                    <h4 className="card-title fw-bold text-primary">{p.role}</h4>
-                    <p className="card-text text-muted">{p.desc}</p>
-                  </div>
-                </div>
+              <div key={idx} className="bg-blue-50 p-8 rounded-none border-l-8 border-red-600 shadow-lg hover:bg-blue-100 transition-colors group">
+                <div className="text-4xl mb-4 group-hover:scale-125 transition-transform duration-300">{p.icon}</div>
+                <h4 className="text-xl font-black text-blue-900 mb-3 uppercase tracking-tighter">{p.role}</h4>
+                <p className="text-gray-700 leading-relaxed font-medium">{p.desc}</p>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* --- GALERIE DYNAMIQUE --- */}
-      <section id="galerie" className="py-5 bg-white">
+      {/* --- GALERIE SWIPER (Thème Rouge & Bleu) --- */}
+      <section id="galerie" className="py-24 bg-blue-900 text-white overflow-hidden">
         <div className="container">
-          <h2 className="text-center mb-5 fw-bold">Moments en Musique</h2>
-          <div className="row g-3">
-            {loading ? (
-              <div className="col-12 text-center py-5">
-                <div className="spinner-border text-primary" role="status"></div>
-                <p className="mt-2 text-muted">Chargement des souvenirs...</p>
-              </div>
-            ) : moments.length > 0 ? (
-              moments.map((moment) => (
-                <div key={moment._id || Math.random()} className="col-md-4 col-sm-6">
-                  <div className="ratio ratio-4x3 overflow-hidden rounded shadow-sm">
-                    <img 
-                      src={moment.imageUrl || "https://images.unsplash.com/photo-1514320298574-255903965a45?q=80&w=400"} 
-                      alt={moment.title || "Image de la chorale"}
-                      className="img-fluid object-fit-cover hover-zoom" 
-                      loading="lazy"
-                      style={{ transition: 'transform .3s ease' }}
-                    />
+          <div className="text-center mb-16">
+            <h2 className="text-4xl font-black mb-4 uppercase tracking-widest">Moments en Musique</h2>
+            <p className="text-red-400 font-bold uppercase tracking-widest">Revivez nos plus beaux concerts</p>
+          </div>
+
+          {loading ? (
+            <div className="flex flex-col items-center py-20">
+              <div className="w-12 h-12 border-4 border-red-600 border-t-white rounded-full animate-spin"></div>
+            </div>
+          ) : moments.length > 0 ? (
+            <div className="px-4">
+              <Swiper
+                effect={'coverflow'}
+                grabCursor={true}
+                centeredSlides={true}
+                slidesPerView={'auto'}
+                loop={true}
+                coverflowEffect={{
+                  rotate: 15,
+                  stretch: 0,
+                  depth: 100,
+                  modifier: 1,
+                  slideShadows: true,
+                }}
+                autoplay={{ delay: 3000 }}
+                pagination={{ clickable: true }}
+                navigation={true}
+                modules={[EffectCoverflow, Pagination, Navigation, Autoplay]}
+                className="pb-20"
+              >
+                {moments.map((moment) => (
+                  <SwiperSlide key={moment._id} className="max-w-[320px] md:max-w-[450px]">
+                    <div className="relative group rounded-none border-4 border-white overflow-hidden shadow-2xl shadow-black">
+                      <img 
+                        src={moment.imageUrl || "https://images.unsplash.com/photo-1514320298574-255903965a45?q=80&w=800"} 
+                        alt={moment.title || "Galerie"}
+                        className="w-full h-[450px] object-cover transition-transform duration-700 group-hover:scale-110"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-red-600/90 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-8">
+                        <p className="text-white font-black text-2xl uppercase italic">{moment.title || "Concert Arche de Noé"}</p>
+                      </div>
+                    </div>
+                  </SwiperSlide>
+                ))}
+              </Swiper>
+            </div>
+          ) : null}
+
+          {/* --- SECTION VRAIES VIDÉOS YOUTUBE --- */}
+          <div className="mt-12 grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto px-4">
+              <div className="flex flex-col gap-3">
+                <div className="relative aspect-video rounded-2xl overflow-hidden border-4 border-white/10 shadow-2xl group transition-all hover:border-red-600">
+                  <iframe className="w-full h-full" src="https://www.youtube.com/embed/Q4xqchvM9pI?list=RDQ4xqchvM9pI" title="SHUKRANI" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"></iframe>
+                  
+                </div>
+                <div className="px-2">
+                  <h5 className="text-white font-black uppercase italic tracking-tighter text-lg group-hover:text-red-500 transition-colors">
+                    Kukrani
+                  </h5>
+                  <div className="flex items-center gap-2">
+                      <span className="w-2 h-2 bg-red-600 rounded-full animate-pulse"></span>
+                      <span className="text-xs text-gray-400 font-bold uppercase tracking-widest">En direct de Lubumbashi</span>
                   </div>
                 </div>
-              ))
-            ) : (
-              <div className="col-12 text-center py-5">
-                <p className="lead text-muted">La galerie sera bientôt mise à jour.</p>
               </div>
-            )}
+              <div className="flex flex-col gap-3">
+                <div className="relative aspect-video rounded-2xl overflow-hidden border-4 border-white/10 shadow-2xl group transition-all hover:border-red-600">
+                  <iframe className="w-full h-full" src="https://www.youtube.com/embed/zP1UNyfdWl8?list=RDzP1UNyfdWl8" title="YOBA_@CHORALEARCHEDENOÉ " allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"></iframe>
+                </div>
+                <div className="px-2">
+                  <h5 className="text-white font-black uppercase italic tracking-tighter text-lg group-hover:text-red-500 transition-colors">
+                    YOBA
+                  </h5>
+                  <div className="flex items-center gap-2">
+                      <span className="w-2 h-2 bg-red-600 rounded-full animate-pulse"></span>
+                      <span className="text-xs text-gray-400 font-bold uppercase tracking-widest">En direct de Lubumbashi</span>
+                  </div>
+                </div>
+              </div>
+
+
+
+
           </div>
         </div>
       </section>
 
-      {/* --- FOOTER --- */}
-      <footer id="contact" className="py-5 bg-dark text-white text-center">
-        <div className="container">
-          <h3 className="mb-4">Rejoignez l'Arche</h3>
-          <p className="text-muted small">Répétitions tous les mardis soir à 19h00.</p>
-          <p className="small mb-0 opacity-50 mt-4">&copy; 2026 Chorale Arche de Noé. Lubumbashi, RDC.</p>
+      {/* --- FOOTER (Rouge Bleu Blanc) --- */}
+      <footer id="contact" className="bg-white text-blue-900 py-20 border-t-8 border-red-600">
+        <div className="container grid grid-cols-1 md:grid-cols-3 gap-12 text-center md:text-left">
+          <div>
+            <h3 className="text-3xl font-black mb-6 uppercase italic text-blue-900">ARCHE DE NOÉ</h3>
+            <p className="text-gray-600 font-medium">
+              Une famille unie par la musique et la foi à <span className="text-red-600 font-bold">Lubumbashi</span>.
+            </p>
+          </div>
+          <div>
+            <h4 className="font-black mb-6 uppercase tracking-tighter text-red-600 border-b-2 border-red-600 inline-block">Répétitions</h4>
+            <p className="text-blue-900 font-bold mb-1">Mardi, Jeudi, Samedi</p>
+            <p className="text-red-600 font-black text-2xl">17h50 — 19h30</p>
+          </div>
+          <div>
+            <h4 className="font-black mb-6 uppercase tracking-tighter text-red-600 border-b-2 border-red-600 inline-block">Localisation</h4>
+            <p className="text-blue-900 font-bold uppercase">Paroisse de Lubumbashi</p>
+            <p className="text-gray-500 font-bold">République Démocratique du Congo</p>
+          </div>
+        </div>
+        <div className="mt-20 pt-8 border-t border-gray-100 text-center text-gray-400 text-xs font-bold uppercase tracking-widest">
+          &copy; 2026 Chorale Arche de Noé. Hébergé sur Railway & Cloudinary.
         </div>
       </footer>
 
-      <style jsx>{`
-        .hover-zoom:hover {
-          transform: scale(1.05);
+      <style jsx global>{`
+        .swiper-button-next, .swiper-button-prev {
+          color: #dc2626 !important;
+          background: white;
+          width: 45px !important;
+          height: 45px !important;
+          border-radius: 0%;
+          box-shadow: 4px 4px 0px #1e3a8a;
+        }
+        .swiper-button-next:after, .swiper-button-prev:after {
+          font-size: 18px !important;
+          font-weight: 900;
+        }
+        .swiper-pagination-bullet-active {
+          background: #dc2626 !important;
+          width: 25px;
+          border-radius: 2px;
         }
       `}</style>
     </div>

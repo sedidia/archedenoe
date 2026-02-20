@@ -80,7 +80,7 @@ const VideosPage = () => {
         <div className="row mb-4">
           <div className="col-md-8 mx-auto text-center">
             <h1 className="display-4 fw-bold text-dark">Vidéos de la Chorale</h1>
-            <p className="lead text-muted">Contenu récupéré en temps réel depuis votre base MongoDB.</p>
+            <p className="lead text-muted">Nos chansons.</p>
           </div>
         </div>
 
