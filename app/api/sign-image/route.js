@@ -15,7 +15,7 @@ export async function POST() {
   return Response.json({
     signature,
     timestamp,
-    cloudName: process.env.CLOUDINARY_CLOUD_NAME, // Vérifie que cette variable est bien dans ton .env ou Railway
+    cloudName: process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME, // Vérifie que cette variable est bien dans ton .env ou Railway
     apiKey: process.env.CLOUDINARY_API_KEY,
   });
 }
