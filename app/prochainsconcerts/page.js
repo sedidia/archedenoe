@@ -1,19 +1,19 @@
 "use client";
 
-import React, { useState, useEffect } from 'react';
-import Link from 'next/link';
+import React, { useState, useEffect } from "react";
+import Link from "next/link";
 
 const ProchainsConcerts = () => {
   const [concerts, setConcerts] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  // Récupération des données depuis l'API
+  // Récupération des données depuis l"API
   useEffect(() => {
     const fetchConcerts = async () => {
       try {
-        const res = await fetch('/api/concerts');
+        const res = await fetch("/api/concerts");
         const data = await res.json();
-        // On suppose que l'API renvoie { success: true, data: [...] }
+        // On suppose que l"API renvoie { success: true, data: [...] }
         setConcerts(data.data || data); 
       } catch (error) {
         console.error("Erreur lors de la récupération des concerts:", error);
@@ -30,7 +30,7 @@ const ProchainsConcerts = () => {
       <nav className="navbar navbar-dark bg-primary shadow-sm mb-5">
         <div className="container">
           <Link href="/" className="navbar-brand fw-bold">
-            ← Retour à l'Accueil
+            ← Retour à l"Accueil
           </Link>
           <span className="navbar-text text-white fw-bold text-uppercase">
             Nos Concerts
@@ -65,7 +65,7 @@ const ProchainsConcerts = () => {
                           src={concert.imageUrl || "https://ix-marketing.imgix.net/global.jpg?auto=format,compress&w=1946"} 
                           className="img-fluid h-100 object-fit-cover" 
                           alt={concert.title} 
-                          style={{ minHeight: '280px' }}
+                          style={{ minHeight: "280px" }}
                         />
                       </div>
                       
@@ -75,10 +75,10 @@ const ProchainsConcerts = () => {
                           <div className="d-flex justify-content-between align-items-start mb-2">
                             <span className="badge bg-primary px-3 py-2">
                               {/* Formatage simple de la date */}
-                              {new Date(concert.date).toLocaleDateString('fr-FR', { day: 'numeric', month: 'long', year: 'numeric' })}
+                              {new Date(concert.date).toLocaleDateString("fr-FR", { day: "numeric", month: "long", year: "numeric" })}
                             </span>
-                            <span className={`fw-bold ${concert.entryType === 'Payant' ? 'text-success' : 'text-primary'}`}>
-                              {concert.entryType === 'Payant' ? 'Entrée Payante' : 'Entrée Libre'}
+                            <span className={`fw-bold ${concert.entryType === "Payant" ? "text-success" : "text-primary"}`}>
+                              {concert.entryType === "Payant" ? "Entrée Payante" : "Entrée Libre"}
                             </span>
                           </div>
                           
@@ -101,7 +101,7 @@ const ProchainsConcerts = () => {
                           
                           <div className="mt-auto">
                             <button className="btn btn-primary fw-bold px-4 shadow-sm">
-                              {concert.entryType === 'Payant' ? 'Acheter un billet' : 'Réserver ma place'}
+                              {concert.entryType === "Payant" ? "Acheter un billet" : "Réserver ma place"}
                             </button>
                           </div>
                         </div>

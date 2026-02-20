@@ -1,7 +1,7 @@
 "use client";
 
-import React, { useState, useEffect } from 'react';
-import Link from 'next/link';
+import React, { useState, useEffect } from "react";
+import Link from "next/link";
 
 const VideosPage = () => {
   // 1. État pour stocker les vidéos de la base de données
@@ -12,7 +12,7 @@ const VideosPage = () => {
   useEffect(() => {
     const fetchVideos = async () => {
       try {
-        const response = await fetch('/api/showvideos'); // Votre route API
+        const response = await fetch("/api/showvideos"); // Votre route API
         const result = await response.json();
         
         if (result.success) {
@@ -46,7 +46,7 @@ const VideosPage = () => {
     } 
     // Gestion YouTube (Si vous en ajoutez plus tard)
     else if (video.videoUrl.includes("youtube.com") || video.videoUrl.includes("youtu.be")) {
-      // Transformation de l'URL pour l'embed si nécessaire
+      // Transformation de l"URL pour l"embed si nécessaire
       const embedUrl = video.videoUrl.replace("watch?v=", "embed/");
       return (
         <div className="ratio ratio-16x9">
@@ -68,7 +68,7 @@ const VideosPage = () => {
       <nav className="navbar navbar-dark bg-primary shadow-sm mb-5">
         <div className="container">
           <Link href="/" className="navbar-brand fw-bold">
-            ← Retour à l'Accueil
+            ← Retour à l"Accueil
           </Link>
           <span className="navbar-text text-white fw-bold text-uppercase">
             Nos Vidéos (Archive MongoDB)
@@ -95,7 +95,7 @@ const VideosPage = () => {
         ) : videos.length === 0 ? (
           <div className="text-center p-5 bg-white rounded shadow-sm">
             <p className="text-muted">Aucune vidéo trouvée dans la base de données.</p>
-            <Link href="/votre-page-d-upload" className="btn btn-primary">Publier la première vidéo</Link>
+            <Link href="/" className="btn btn-primary">Retour à la homepage</Link>
           </div>
         ) : (
           <div className="row justify-content-center g-4 pb-5">
@@ -106,7 +106,7 @@ const VideosPage = () => {
                   <div className="card-body p-4">
                     <h3 className="card-title fw-bold text-primary mb-2">{video.title}</h3>
                     <p className="card-text text-muted mb-3">
-                      Posté le : {new Date(video.createdAt).toLocaleDateString('fr-FR')}
+                      Posté le : {new Date(video.createdAt).toLocaleDateString("fr-FR")}
                     </p>
                     <div className="d-flex justify-content-between align-items-center">
                       <span className="badge bg-info text-dark">Cloudinary HD</span>

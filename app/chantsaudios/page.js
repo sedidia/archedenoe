@@ -1,7 +1,7 @@
 "use client";
 
-import React, { useState } from 'react';
-import Link from 'next/link';
+import React, { useState } from "react";
+import Link from "next/link";
 
 const ChantsPage = () => {
   // Liste des chants (À lier plus tard à votre MongoDB / Cloudinary)
@@ -38,7 +38,7 @@ const ChantsPage = () => {
       <nav className="navbar navbar-dark bg-primary shadow-sm mb-5">
         <div className="container">
           <Link href="/" className="navbar-brand fw-bold">
-            ← Retour à l'Accueil
+            ← Retour à l"Accueil
           </Link>
           <span className="navbar-text text-white fw-bold text-uppercase">
             Répertoire Vocal
@@ -74,7 +74,7 @@ const ChantsPage = () => {
                       <div className="col-md-6 mb-3 mb-md-0">
                         <audio controls className="w-100 custom-audio-player">
                           <source src={chant.audioUrl} type="audio/mpeg" />
-                          Votre navigateur ne supporte pas l'élément audio.
+                          Votre navigateur ne supporte pas l"élément audio.
                         </audio>
                       </div>
 
@@ -90,7 +90,7 @@ const ChantsPage = () => {
           </div>
         </div>
 
-        {/* Note pour l'utilisateur */}
+        {/* Note pour l"utilisateur */}
         <div className="text-center mt-5 pb-5">
           <p className="text-muted italic small">
             Tous nos chants sont protégés. Pour obtenir les partitions, contactez le chef de chœur.

@@ -1,12 +1,12 @@
 "use client";
-import { useState } from 'react';
+import { useState } from "react";
 import PostVideo from "./postvideo/page";
 import PostConcert from "./postconcert/page";
 import PostMoment from "./postmoment/page";
 
 
 export default function AdminDashboard() {
-  const [activeTab, setActiveTab] = useState('videos');
+  const [activeTab, setActiveTab] = useState("videos");
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
   const switchTab = (tab) => {
@@ -38,7 +38,7 @@ export default function AdminDashboard() {
 
       <div className="row g-0">
         {/* BARRE LATÉRALE - Fluide avec Transform */}
-        <nav className={`col-md-3 col-lg-2 bg-dark sidebar min-vh-100 shadow-lg ${isSidebarOpen ? 'open' : ''}`}>
+        <nav className={`col-md-3 col-lg-2 bg-dark sidebar min-vh-100 shadow-lg ${isSidebarOpen ? "open" : ""}`}>
           <div className="position-sticky pt-4 px-3">
             <div className="d-flex align-items-center mb-4 px-2">
                <i className="bi bi-shield-check text-primary fs-4 me-2"></i>
@@ -48,24 +48,24 @@ export default function AdminDashboard() {
             <ul className="nav flex-column gap-2">
               <li className="nav-item">
                 <button 
-                  onClick={() => switchTab('videos')}
-                  className={`nav-link w-100 text-start border-0 py-3 px-3 transition-sm ${activeTab === 'videos' ? 'bg-primary text-white rounded-3 shadow' : 'text-white-50 bg-transparent hover-link'}`}
+                  onClick={() => switchTab("videos")}
+                  className={`nav-link w-100 text-start border-0 py-3 px-3 transition-sm ${activeTab === "videos" ? "bg-primary text-white rounded-3 shadow" : "text-white-50 bg-transparent hover-link"}`}
                 >
                   <i className="bi bi-camera-video me-2"></i> Publier Vidéo
                 </button>
               </li>
               <li className="nav-item">
                 <button 
-                  onClick={() => switchTab('postconcert')}
-                  className={`nav-link w-100 text-start border-0 py-3 px-3 transition-sm ${activeTab === 'postconcert' ? 'bg-primary text-white rounded-3 shadow' : 'text-white-50 bg-transparent hover-link'}`}
+                  onClick={() => switchTab("postconcert")}
+                  className={`nav-link w-100 text-start border-0 py-3 px-3 transition-sm ${activeTab === "postconcert" ? "bg-primary text-white rounded-3 shadow" : "text-white-50 bg-transparent hover-link"}`}
                 >
                   <i className="bi bi-calendar-event me-2"></i> Programmer concert à venir
                 </button>
               </li>
               <li className="nav-item">
                 <button 
-                  onClick={() => switchTab('momentenmusique')}
-                  className={`nav-link w-100 text-start border-0 py-3 px-3 transition-sm ${activeTab === 'momentenmusique' ? 'bg-primary text-white rounded-3 shadow' : 'text-white-50 bg-transparent hover-link'}`}
+                  onClick={() => switchTab("momentenmusique")}
+                  className={`nav-link w-100 text-start border-0 py-3 px-3 transition-sm ${activeTab === "momentenmusique" ? "bg-primary text-white rounded-3 shadow" : "text-white-50 bg-transparent hover-link"}`}
                 >
                   <i className="bi bi-music-note-beamed me-2"></i> Publier moment en Musique
                 </button>
@@ -86,16 +86,16 @@ export default function AdminDashboard() {
         <main className="col-md-9 ms-sm-auto col-lg-10 px-md-4 bg-light min-vh-100 pt-3">
           <div className="d-none d-md-flex justify-content-between align-items-center pb-3 mb-4 border-bottom">
             <h1 className="h4 fw-bold text-dark m-0">
-              {activeTab === 'videos' && 'Publication Vidéo HD'}
-              {activeTab === 'postconcert' && 'Gestion Concerts'}
-              {activeTab === 'momentenmusique' && 'Moments Musicaux'}
+              {activeTab === "videos" && "Publication Vidéo HD"}
+              {activeTab === "postconcert" && "Gestion Concerts"}
+              {activeTab === "momentenmusique" && "Moments Musicaux"}
             </h1>
             <span className="badge rounded-pill bg-primary px-3 py-2">Mode Administration</span>
           </div>
 
           <div className="row justify-content-center pt-2">
             <div className="col-12 col-xl-10">
-              {activeTab === 'videos' && (
+              {activeTab === "videos" && (
                 <div className="fade-in">
                   <PostVideo />
                 </div>
@@ -105,7 +105,7 @@ export default function AdminDashboard() {
           </div>
           <div className="row justify-content-center pt-2">
             <div className="col-12 col-xl-10">
-              {activeTab === 'postconcert' && (
+              {activeTab === "postconcert" && (
                 <div className="fade-in">
                   <PostConcert />
                 </div>
@@ -115,7 +115,7 @@ export default function AdminDashboard() {
           </div>
           <div className="row justify-content-center pt-2">
             <div className="col-12 col-xl-10">
-              {activeTab === 'momentenmusique' && (
+              {activeTab === "momentenmusique" && (
                 <div className="fade-in">
                   <PostMoment />
                 </div>
@@ -171,7 +171,7 @@ export default function AdminDashboard() {
             transform: translateX(-100%); /* Masqué par défaut */
           }
           .sidebar.open {
-            transform: translateX(0); /* Glisse vers l'intérieur */
+            transform: translateX(0); /* Glisse vers l"intérieur */
           }
         }
 
