@@ -20,9 +20,35 @@ interface Moment {
 }
 
 const HomePage = () => {
-  const [isOpen, setIsOpen] = useState(false);
   const [moments, setMoments] = useState<Moment[]>([]);
   const [loading, setLoading] = useState(true);
+
+
+  // MODAL ABOUT
+  const [isOpen, setIsOpen] = useState(false);
+  const [aboutIsOpen, setAboutIsOpen] = useState(false);
+
+  const features = [
+    {
+      title: "Notre Passion",
+      desc: "L'harmonie des voix pour créer des moments d'émotion pure.",
+      border: "border-red-600",
+      text: "text-red-600"
+    },
+    {
+      title: "Notre Répertoire",
+      desc: "Du classique au contemporain, une diversité qui nous définit.",
+      border: "border-blue-600",
+      text: "text-blue-600"
+    },
+    {
+      title: "Nous Rejoindre",
+      desc: "Ouvert à tous les passionnés, sans distinction de niveau.",
+      border: "border-gray-200",
+      text: "text-gray-800"
+    }
+  ];
+  // MODAL ABOUT
 
   // Fermer le menu si on redimensionne l'écran au delà du mobile
   useEffect(() => {
@@ -65,7 +91,7 @@ const HomePage = () => {
   return (
     <div className="min-h-screen bg-white font-sans">
       {/* --- NAVIGATION (Thème Bleu/Rouge/Blanc) --- */}
-      <nav className="bg-blue-800 sticky top-0 z-[100] shadow-xl border-b-4 border-red-600">
+      <nav className="bg-red-800 sticky top-0 z-[100] shadow-xl border-b-4 border-red-600">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between h-20 items-center">
             <div className="flex-shrink-0">
@@ -78,6 +104,7 @@ const HomePage = () => {
             <div className="hidden lg:block">
               <ul className="flex space-x-8 items-center list-none mb-0">
                 <li><a href="#pupitres" className="text-white no-underline hover:text-red-400 transition-colors font-bold uppercase text-sm tracking-widest">Nos Voix</a></li>
+                <li><a onClick={() => setAboutIsOpen(true)} href="#apropos" className="text-white no-underline hover:text-red-400 transition-colors font-bold uppercase text-sm tracking-widest">A propos</a></li>
                 <li><a href="#galerie" className="text-white no-underline hover:text-red-400 transition-colors font-bold uppercase text-sm tracking-widest">Galerie</a></li>
                 <li>
                   <a href="#contact" className="bg-red-600 hover:bg-white hover:text-red-600 text-white px-6 py-2 rounded-full font-black no-underline transition-all transform hover:scale-105 shadow-lg border-2 border-transparent hover:border-red-600">
@@ -119,7 +146,7 @@ const HomePage = () => {
         <div className="absolute inset-0 z-0">
             <div className="absolute inset-0 bg-blue-900/60 z-10"></div>
             <img 
-                src="https://res.cloudinary.com/archedenoe/image/upload/v1771585361/moment_posters/g1p9qgajo1kn5gdx0fxw.jpg" 
+                src="https://res.cloudinary.com/archedenoe/image/upload/v1771585832/moment_posters/cttplqy6opc4vskzntfg.jpg" 
                 className="w-full h-full object-cover" 
                 alt="Chorale Arche de Noé"
             />
@@ -271,13 +298,104 @@ const HomePage = () => {
                   </div>
                 </div>
               </div>
-
-
-
-
           </div>
         </div>
       </section>
+
+      {/* MODAL ABOUT */}
+      
+        {/* MODAL PLEIN ÉCRAN */}
+        {aboutIsOpen && (
+          <div className="fixed inset-0 z-50 flex items-center justify-center p-0 sm:p-4">
+            
+            {/* Backdrop (Arrière-plan flou) */}
+            <div 
+              className="absolute inset-0 bg-black/60 backdrop-blur-sm"
+              onClick={() => setAboutIsOpen(false)}
+            ></div>
+
+            {/* Contenu du Modal */}
+            <div className="relative bg-white w-full h-full sm:h-auto sm:max-h-[90vh] sm:max-w-6xl sm:rounded-2xl shadow-2xl overflow-y-auto transition-all duration-500 scale-100">
+              
+              {/* Bouton Fermer */}
+              <button 
+                onClick={() => setAboutIsOpen(false)}
+                className="absolute top-4 right-4 z-10 bg-white/80 hover:bg-red-600 hover:text-white text-gray-800 p-2 rounded-full transition-colors shadow-md"
+              >
+                <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                </svg>
+              </button>
+
+              {/* Ton composant AboutSection intégré ici */}
+              <section className="pt-16 mt-16 relative bg-white py-12 px-6 sm:px-10 overflow-hidden">
+                {/* Éléments décoratifs */}
+                <div className="absolute top-0 left-0 w-full h-2 "></div>
+                <div className="absolute bottom-0 left-0 w-full h-2 bg-red-600"></div>
+
+                <div className="max-w-5xl mx-auto">
+                  <div className="text-center mb-12">
+                    <h2 className="text-blue-600 font-semibold tracking-wide uppercase text-sm">À propos de nous</h2>
+                    <p className="mt-2 text-3xl font-extrabold text-gray-900 sm:text-4xl">
+                      L'Âme de notre <span className="text-red-600">Chorale</span>
+                    </p>
+                    <div className="mt-4 flex justify-center">
+                      <div className="h-1 w-20 bg-blue-600 rounded-full"></div>
+                    </div>
+                  </div>
+
+                  <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    {features.map((item, index) => (
+                      <div 
+                        key={index}
+                        className={`p-6 border-l-4 ${item.border} bg-gray-50 hover:bg-white hover:shadow-xl transition-all duration-300`}
+                      >
+                        <h3 className={`text-lg font-bold ${item.text} mb-2`}>{item.title}</h3>
+                        <p className="text-sm text-gray-600 leading-relaxed">
+                          {item.desc}
+                        </p>
+                      </div>
+                    ))}
+                  </div>
+
+                  <div className="mt-16 flex flex-col lg:flex-row items-center gap-10">
+                    <div className="w-full lg:w-1/2 relative">
+                      <div className="absolute -top-3 -left-3 w-full h-full border-2 border-blue-600 rounded-lg hidden sm:block"></div>
+                      <div className="relative h-72 w-full bg-gray-200 rounded-lg overflow-hidden shadow-lg">
+                        <img 
+                          src="https://res.cloudinary.com/archedenoe/image/upload/v1771585800/moment_posters/gy9ctd4na3lwudxxxdh2.jpg" 
+                          alt="Chorale en concert"
+                          className="w-full h-full object-cover"
+                        />
+                      </div>
+                    </div>
+
+                    <div className="w-full lg:w-1/2 space-y-4 text-left">
+                      <h3 className="text-2xl font-bold text-gray-900">Une histoire de cœur et de voix</h3>
+                      <p className="text-gray-600">
+                        Depuis plus de 10 ans, nous rassemblons des personnes de tous horizons pour partager 
+                        le plaisir du chant choral. Notre ensemble se distingue par sa rigueur et sa convivialité.
+                      </p>
+                      <div className="flex gap-4 pt-4">
+                        <button className="bg-blue-600 hover:bg-blue-700 text-white px-5 py-2.5 rounded-full text-sm font-medium transition-colors">
+                          Nous découvrir
+                        </button>
+                        <button 
+                          onClick={() => setAboutIsOpen(false)}
+                          className="border-2 border-red-600 text-red-600 hover:bg-red-600 hover:text-white px-5 py-2.5 rounded-full text-sm font-medium transition-all"
+                        >
+                          Fermer
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </section>
+
+            </div>
+          </div>
+        )}
+      {/* MODAL ABOUT */}
 
       {/* --- FOOTER (Rouge Bleu Blanc) --- */}
       <footer id="contact" className="bg-white text-blue-900 py-20 border-t-8 border-red-600">
@@ -291,16 +409,41 @@ const HomePage = () => {
           <div>
             <h4 className="font-black mb-6 uppercase tracking-tighter text-red-600 border-b-2 border-red-600 inline-block">Répétitions</h4>
             <p className="text-blue-900 font-bold mb-1">Mardi, Jeudi, Samedi</p>
-            <p className="text-red-600 font-black text-2xl">17h50 — 19h30</p>
+            <p className="text-red-600 font-black text-2xl">17h50 — 18h45</p>
           </div>
           <div>
             <h4 className="font-black mb-6 uppercase tracking-tighter text-red-600 border-b-2 border-red-600 inline-block">Localisation</h4>
-            <p className="text-blue-900 font-bold uppercase">Paroisse de Lubumbashi</p>
+            <p className="text-blue-900 font-bold uppercase">Paroisse la Sentinelle</p>
             <p className="text-gray-500 font-bold">République Démocratique du Congo</p>
           </div>
         </div>
+
+        {/* Bouton pour ouvrir le Modal */}
+        
+
+
+
         <div className="mt-20 pt-8 border-t border-gray-100 text-center text-gray-400 text-xs font-bold uppercase tracking-widest">
-          &copy; 2026 Chorale Arche de Noé. Hébergé sur Railway & Cloudinary.
+          <button 
+            onClick={() => setAboutIsOpen(true)}
+            className="inline-flex items-center gap-2 bg-[#0d6efd] hover:bg-[#0b5ed7] text-white font-medium py-2 px-4 rounded transition-colors shadow-sm"
+          >
+            {/* Icône "About" (Info) en SVG */}
+            <svg 
+              xmlns="http://www.w3.org/2000/svg" 
+              width="16" 
+              height="16" 
+              fill="currentColor" 
+              viewBox="0 0 16 16"
+            >
+              <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+              <path d="m8.93 6.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533L8.93 6.588zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0z"/>
+            </svg>
+            Qui sommes-nous?
+          </button>
+        </div>
+        <div className="mt-4 pt-0 border-t border-gray-100 text-center text-gray-400 text-xs font-bold uppercase tracking-widest">
+          &copy; 2026 Chorale Arche de Noé.
         </div>
       </footer>
 
