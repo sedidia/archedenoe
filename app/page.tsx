@@ -3,12 +3,14 @@
 import Link from 'next/link';
 import React, { useState, useEffect } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { Navigation, Pagination, Autoplay, EffectCoverflow } from 'swiper/modules';
+
+import { Navigation, Pagination, Autoplay, EffectCreative } from 'swiper/modules';
+// N'oublie pas le CSS correspondant
+import 'swiper/css/effect-creative';
 
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
-import 'swiper/css/effect-coverflow';
 
 interface Moment {
   _id: string;
@@ -180,34 +182,56 @@ const HomePage = () => {
           ) : moments.length > 0 ? (
             <div className="px-4">
               <Swiper
-                effect={'coverflow'}
                 grabCursor={true}
                 centeredSlides={true}
                 slidesPerView={'auto'}
                 loop={true}
-                coverflowEffect={{
-                  rotate: 15,
-                  stretch: 0,
-                  depth: 100,
-                  modifier: 1,
-                  slideShadows: true,
+                effect={'creative'}
+                creativeEffect={{
+                  prev: {
+                    shadow: true,
+                    translate: ['-120%', 0, -500],
+                    opacity: 0.3,
+                  },
+                  next: {
+                    translate: ['120%', 0, -500],
+                    opacity: 0.3,
+                  },
                 }}
-                autoplay={{ delay: 3000 }}
-                pagination={{ clickable: true }}
+                autoplay={{
+                  delay: 4000,
+                  disableOnInteraction: false,
+                }}
+                pagination={{ 
+                  clickable: true,
+                  dynamicBullets: true // Les points de pagination s'adaptent à la taille
+                }}
                 navigation={true}
-                modules={[EffectCoverflow, Pagination, Navigation, Autoplay]}
-                className="pb-20"
+                modules={[EffectCreative, Pagination, Navigation, Autoplay]}
+                className="pb-24 !overflow-visible" // !overflow-visible pour voir les slides sortir
               >
                 {moments.map((moment) => (
-                  <SwiperSlide key={moment._id} className="max-w-[320px] md:max-w-[450px]">
-                    <div className="relative group rounded-none border-4 border-white overflow-hidden shadow-2xl shadow-black">
+                  <SwiperSlide key={moment._id} className="max-w-[320px] md:max-w-[550px]">
+                    <div className="relative group overflow-hidden rounded-[2rem] border-8 border-white shadow-[0_20px_50px_rgba(0,0,0,0.3)] transition-all duration-500">
+                      
+                      {/* Overlay Dégradé Permanent pour le texte */}
+                      <div className="absolute inset-0 bg-gradient-to-t from-blue-900/90 via-transparent to-black/20 z-10"></div>
+                      
                       <img 
                         src={moment.imageUrl || "https://images.unsplash.com/photo-1514320298574-255903965a45?q=80&w=800"} 
                         alt={moment.title || "Galerie"}
-                        className="w-full h-[450px] object-cover transition-transform duration-700 group-hover:scale-110"
+                        className="w-full h-[500px] object-cover transition-transform duration-1000 group-hover:scale-110"
                       />
-                      <div className="absolute inset-0 bg-gradient-to-t from-red-600/90 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-8">
-                        <p className="text-white font-black text-2xl uppercase italic">{moment.title || "Concert Arche de Noé"}</p>
+                      
+                      {/* Contenu textuel stylé */}
+                      <div className="absolute bottom-0 left-0 right-0 p-8 z-20 transform translate-y-2 group-hover:translate-y-0 transition-transform">
+                        <span className="bg-red-600 text-white text-[10px] font-black px-3 py-1 uppercase tracking-[0.2em] mb-3 inline-block">
+                          Souvenir
+                        </span>
+                        <p className="text-white font-black text-2xl md:text-3xl uppercase italic leading-none drop-shadow-lg">
+                          {moment.title || "Concert Arche de Noé"}
+                        </p>
+                        <div className="w-0 group-hover:w-full h-1 bg-red-600 transition-all duration-500 mt-2"></div>
                       </div>
                     </div>
                   </SwiperSlide>
