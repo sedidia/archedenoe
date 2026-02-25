@@ -103,8 +103,8 @@ const HomePage = () => {
             {/* Menu Desktop */}
             <div className="hidden lg:block">
               <ul className="flex space-x-8 items-center list-none mb-0">
-                <li><a href="#pupitres" className="text-white no-underline hover:text-red-400 transition-colors font-bold uppercase text-sm tracking-widest">Nos Voix</a></li>
                 <li><a onClick={() => setAboutIsOpen(true)} href="#apropos" className="text-white no-underline hover:text-red-400 transition-colors font-bold uppercase text-sm tracking-widest">A propos</a></li>
+                <li><a href="#pupitres" className="text-white no-underline hover:text-red-400 transition-colors font-bold uppercase text-sm tracking-widest">Nos Voix</a></li>
                 <li><a href="#galerie" className="text-white no-underline hover:text-red-400 transition-colors font-bold uppercase text-sm tracking-widest">Galerie</a></li>
                 <li>
                   <a href="#contact" className="bg-red-600 hover:bg-white hover:text-red-600 text-white px-6 py-2 rounded-full font-black no-underline transition-all transform hover:scale-105 shadow-lg border-2 border-transparent hover:border-red-600">
@@ -134,6 +134,7 @@ const HomePage = () => {
         {/* Menu Mobile (Slide Down) */}
         <div className={`lg:hidden absolute w-full bg-blue-900 border-b-4 border-red-600 transition-all duration-300 ease-in-out overflow-hidden ${isOpen ? 'max-h-64 opacity-100' : 'max-h-0 opacity-0'}`}>
           <div className="px-4 py-6 space-y-4">
+            <li><a onClick={() => setAboutIsOpen(true)} href="#apropos" className="text-white no-underline hover:text-red-400 transition-colors font-bold uppercase text-sm tracking-widest">A propos</a></li>
             <a href="#pupitres" onClick={() => setIsOpen(false)} className="block text-white no-underline font-bold text-lg hover:text-red-400">Nos Voix</a>
             <a href="#galerie" onClick={() => setIsOpen(false)} className="block text-white no-underline font-bold text-lg hover:text-red-400">Galerie</a>
             <a href="#contact" onClick={() => setIsOpen(false)} className="block bg-red-600 text-white text-center py-3 rounded-lg font-black no-underline">REJOINDRE LA CHORALE</a>

@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server';
 import dbConnect from '@/lib/mongodb';
 import Concert from '@/models/Concert';
+import { cookies } from 'next/headers';
 
 // --- CETTE FONCTION PERMET DE LIRE (GET) ---
 export async function GET() {
@@ -16,6 +17,12 @@ export async function GET() {
 
 // --- TA FONCTION POST EXISTANTE (POUR ENREGISTRER) ---
 export async function POST(req) {
+  const cookieStore = await cookies();
+  const session = cookieStore.get('admin_session');
+  if(!session || session.value !== 'authentificated_arche_de_noe'){
+    return new Response(JSON.stringify({ error: "Accès interdit : Veuillez vous connecter." }))
+  }
+
   try {
     await dbConnect();
     const body = await req.json();
