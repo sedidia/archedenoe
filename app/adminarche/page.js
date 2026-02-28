@@ -33,7 +33,7 @@ export default function AdminDashboard() {
   
     // Utilisation d'une variable d'env (comparaison côté client ici pour la simplicité, 
     // mais idéalement via une route API pour la sécurité maximale)
-    const secret = process.env.NEXT_PUBLIC_ACCESS_CODE;
+    const secret = process.env.ARCHE_PUBLIC_ACCESS_CODE;
   
     if (accessCode === secret) {
       setIsAuthorized(true);
