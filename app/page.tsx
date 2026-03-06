@@ -226,12 +226,12 @@ const HomePage = () => {
                 effect={'creative'}
                 creativeEffect={{
                   prev: {
-                    shadow: false,
-                    translate: ['-120%', 0, -500],
+                    shadow: true,
+                    translate: ['-120%', 0.3, -500],
                     opacity: 0,
                   },
                   next: {
-                    translate: ['120%', 0, -500],
+                    translate: ['120%', 0.3, -500],
                     opacity: 0,
                   },
                 }}
@@ -243,7 +243,7 @@ const HomePage = () => {
                   clickable: true,
                   dynamicBullets: true // Les points de pagination s'adaptent à la taille
                 }}
-                navigation={true}
+                navigation={false}
                 modules={[EffectCreative, Pagination, Navigation, Autoplay]}
                 className="pb-24 !overflow-visible" // !overflow-visible pour voir les slides sortir
               >
@@ -464,12 +464,12 @@ const HomePage = () => {
 
       <style jsx global>{`
         .swiper-button-next, .swiper-button-prev {
-          color: #dc2626 !important;
+          color: #dc262600 !important;
           background: white;
           width: 45px !important;
           height: 45px !important;
           border-radius: 0%;
-          box-shadow: 4px 4px 0px #1e3a8a;
+          box-shadow: 4px 4px 0px #1e3b8a00;
         }
         .swiper-button-next:after, .swiper-button-prev:after {
           font-size: 18px !important;
