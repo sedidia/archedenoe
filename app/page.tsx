@@ -227,12 +227,12 @@ const HomePage = () => {
                 creativeEffect={{
                   prev: {
                     shadow: true,
-                    translate: ['-120%', 0.3, -500],
-                    opacity: 0,
+                    translate: ['-120%', 0, -500],
+                    opacity: 0.3,
                   },
                   next: {
-                    translate: ['120%', 0.3, -500],
-                    opacity: 0,
+                    translate: ['120%', 0, -500],
+                    opacity: 0.3,
                   },
                 }}
                 autoplay={{
@@ -243,7 +243,7 @@ const HomePage = () => {
                   clickable: true,
                   dynamicBullets: true // Les points de pagination s'adaptent à la taille
                 }}
-                navigation={true}
+                navigation={false}
                 modules={[EffectCreative, Pagination, Navigation, Autoplay]}
                 className="pb-24 !overflow-visible" // !overflow-visible pour voir les slides sortir
               >
