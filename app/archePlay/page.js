@@ -174,6 +174,59 @@ export default function ArchePlay() {
 
   return (
     <main className="h-screen w-full overflow-y-scroll snap-y snap-mandatory bg-black scrollbar-hide">
+
+      <nav className="bg-red-800 sticky top-0 z-[100] ">
+              <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div className="flex justify-between h-20 items-center">
+                  <div className="flex-shrink-0">
+                    <Link href="/" className="text-white font-black text-2xl tracking-tighter no-underline flex items-center gap-2">
+                      <span className="bg-red-600 px-2 py-1 rounded">ARCHE</span> DE NOÉ
+                    </Link>
+                  </div>
+      
+                  {/* Menu Desktop */}
+                  <div className="hidden lg:block">
+                    <ul className="flex space-x-8 items-center list-none mb-0">
+                      <li><a onClick={() => setAboutIsOpen(false)} href="#" className="text-white no-underline hover:text-red-400 transition-colors font-bold uppercase text-sm tracking-widest">A propos</a></li>
+                      <li><a onClick={() => setAboutIsOpen(false)} href="#pupitres" className="text-white no-underline hover:text-red-400 transition-colors font-bold uppercase text-sm tracking-widest">Nos Voix</a></li>
+                      <li><a onClick={() => setAboutIsOpen(false)} href="#galerie" className="text-white no-underline hover:text-red-400 transition-colors font-bold uppercase text-sm tracking-widest">Galerie</a></li>
+                      <li>
+                        <a onClick={() => setAboutIsOpen(false)} href="#contact" className="bg-red-600 hover:bg-white hover:text-red-600 text-white px-6 py-2 rounded-full font-black no-underline transition-all transform hover:scale-105 shadow-lg border-2 border-transparent hover:border-red-600">
+                          REJOINDRE LA CHORALE
+                        </a>
+                      </li>
+                    </ul>
+                  </div>
+      
+                  {/* Bouton Hamburger */}
+                  <div className="lg:hidden flex items-center">
+                    <button 
+                      onClick={() => setIsOpen(!isOpen)} 
+                      className="text-white p-2 focus:outline-none transition-transform active:scale-90"
+                      aria-label="Toggle menu"
+                    >
+                      <div className="relative w-6 h-5">
+                        <span className={`absolute block w-6 h-1 bg-white rounded-full transition-all duration-300 ${isOpen ? 'rotate-45 top-2' : 'top-0'}`}></span>
+                        <span className={`absolute block w-6 h-1 bg-white rounded-full transition-all duration-300 top-2 ${isOpen ? 'opacity-0' : 'opacity-100'}`}></span>
+                        <span className={`absolute block w-6 h-1 bg-white rounded-full transition-all duration-300 ${isOpen ? '-rotate-45 top-2' : 'top-4'}`}></span>
+                      </div>
+                    </button>
+                  </div>
+                </div>
+              </div>
+      
+              {/* Menu Mobile (Slide Down) */}
+              <div className={`lg:hidden absolute w-full bg-blue-900 border-b-4 border-red-600 transition-all duration-300 ease-in-out overflow-hidden ${isOpen ? 'max-h-64 opacity-100' : 'max-h-0 opacity-0'}`}>
+                <div className="px-4 py-6 space-y-4">
+                  <button onClick={closeNav} className="pb-4 block text-white no-underline font-bold text-lg hover:text-red-400">A propos</button>
+                  <a href="#pupitres" onClick={closeAbout} className="block text-white no-underline font-bold text-lg hover:text-red-400">Nos Voix</a>
+                  <a href="#galerie" onClick={closeAbout} className="block text-white no-underline font-bold text-lg hover:text-red-400">Galerie</a>
+                  <a href="#contact" onClick={closeAbout} className="block bg-red-600 text-white text-center py-3 rounded-lg font-black no-underline">REJOINDRE LA CHORALE</a>
+                </div>
+              </div>
+            </nav>
+
+
       {videos.map((video) => (
         <VideoCard 
           key={video._id} 
@@ -190,7 +243,8 @@ export default function ArchePlay() {
           </div>
         </div>
       )}
-
+      
+    
       <style jsx global>{`
         .scrollbar-hide::-webkit-scrollbar { display: none; }
         .scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }

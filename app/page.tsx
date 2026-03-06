@@ -88,10 +88,13 @@ const HomePage = () => {
     fetchMoments();
   }, []);
 
+  const closeNav = () => { setAboutIsOpen(true); setIsOpen(false); }
+  const closeAbout = () => { setIsOpen(false); setAboutIsOpen(false); }
+
   return (
     <div className="min-h-screen bg-white font-sans">
       {/* --- NAVIGATION (Thème Bleu/Rouge/Blanc) --- */}
-      <nav className="bg-red-800 sticky top-0 z-[100] shadow-xl border-b-4 border-red-600">
+      <nav className="bg-red-800 sticky top-0 z-[100] ">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between h-20 items-center">
             <div className="flex-shrink-0">
@@ -103,11 +106,11 @@ const HomePage = () => {
             {/* Menu Desktop */}
             <div className="hidden lg:block">
               <ul className="flex space-x-8 items-center list-none mb-0">
-                <li><a onClick={() => setAboutIsOpen(true)} href="#apropos" className="text-white no-underline hover:text-red-400 transition-colors font-bold uppercase text-sm tracking-widest">A propos</a></li>
-                <li><a href="#pupitres" className="text-white no-underline hover:text-red-400 transition-colors font-bold uppercase text-sm tracking-widest">Nos Voix</a></li>
-                <li><a href="#galerie" className="text-white no-underline hover:text-red-400 transition-colors font-bold uppercase text-sm tracking-widest">Galerie</a></li>
+                <li><a onClick={() => setAboutIsOpen(false)} href="#" className="text-white no-underline hover:text-red-400 transition-colors font-bold uppercase text-sm tracking-widest">A propos</a></li>
+                <li><a onClick={() => setAboutIsOpen(false)} href="#pupitres" className="text-white no-underline hover:text-red-400 transition-colors font-bold uppercase text-sm tracking-widest">Nos Voix</a></li>
+                <li><a onClick={() => setAboutIsOpen(false)} href="#galerie" className="text-white no-underline hover:text-red-400 transition-colors font-bold uppercase text-sm tracking-widest">Galerie</a></li>
                 <li>
-                  <a href="#contact" className="bg-red-600 hover:bg-white hover:text-red-600 text-white px-6 py-2 rounded-full font-black no-underline transition-all transform hover:scale-105 shadow-lg border-2 border-transparent hover:border-red-600">
+                  <a onClick={() => setAboutIsOpen(false)} href="#contact" className="bg-red-600 hover:bg-white hover:text-red-600 text-white px-6 py-2 rounded-full font-black no-underline transition-all transform hover:scale-105 shadow-lg border-2 border-transparent hover:border-red-600">
                     REJOINDRE LA CHORALE
                   </a>
                 </li>
@@ -134,10 +137,10 @@ const HomePage = () => {
         {/* Menu Mobile (Slide Down) */}
         <div className={`lg:hidden absolute w-full bg-blue-900 border-b-4 border-red-600 transition-all duration-300 ease-in-out overflow-hidden ${isOpen ? 'max-h-64 opacity-100' : 'max-h-0 opacity-0'}`}>
           <div className="px-4 py-6 space-y-4">
-            <li><a onClick={() => setAboutIsOpen(true)} href="#apropos" className="text-white no-underline hover:text-red-400 transition-colors font-bold uppercase text-sm tracking-widest">A propos</a></li>
-            <a href="#pupitres" onClick={() => setIsOpen(false)} className="block text-white no-underline font-bold text-lg hover:text-red-400">Nos Voix</a>
-            <a href="#galerie" onClick={() => setIsOpen(false)} className="block text-white no-underline font-bold text-lg hover:text-red-400">Galerie</a>
-            <a href="#contact" onClick={() => setIsOpen(false)} className="block bg-red-600 text-white text-center py-3 rounded-lg font-black no-underline">REJOINDRE LA CHORALE</a>
+            <button onClick={closeNav} className="pb-4 block text-white no-underline font-bold text-lg hover:text-red-400">A propos</button>
+            <a href="#pupitres" onClick={closeAbout} className="block text-white no-underline font-bold text-lg hover:text-red-400">Nos Voix</a>
+            <a href="#galerie" onClick={closeAbout} className="block text-white no-underline font-bold text-lg hover:text-red-400">Galerie</a>
+            <a href="#contact" onClick={closeAbout} className="block bg-red-600 text-white text-center py-3 rounded-lg font-black no-underline">REJOINDRE LA CHORALE</a>
           </div>
         </div>
       </nav>
@@ -161,10 +164,10 @@ const HomePage = () => {
             L'ensemble vocal <span className="text-red-500 font-bold">Arche de Noé</span> de Lubumbashi.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Link href="/prochainsconcerts" className="bg-red-600 hover:bg-red-700 text-white px-8 py-4 rounded-full font-black text-lg transition-all no-underline shadow-xl">
+            <Link href="/prochainsconcerts" className="bg-red-600 hover:bg-red-700 text-white px-4 py-3 rounded-4 font-black text-lg transition-all no-underline shadow-xl">
               Prochains Concerts
             </Link>
-            <Link href="/chantsvideos" className="bg-white text-blue-900 hover:bg-gray-100 px-8 py-4 rounded-full font-black text-lg transition-all no-underline shadow-xl">
+            <Link href="/chantsvideos" className="bg-white text-blue-900 hover:bg-gray-100 px-4 py-3 rounded-4 font-black text-lg transition-all no-underline shadow-xl">
               Écouter nos chants
             </Link>
           </div>
@@ -192,6 +195,12 @@ const HomePage = () => {
               </div>
             ))}
           </div>
+
+          <div className="text-center mt-16">
+            <Link href="/archePlay" className="bg-red-600 hover:bg-red-700 text-white px-4 py-3 rounded-4 font-black text-lg transition-all no-underline shadow-xl">
+              Arche play
+            </Link>
+          </div>
         </div>
       </section>
 
@@ -217,13 +226,13 @@ const HomePage = () => {
                 effect={'creative'}
                 creativeEffect={{
                   prev: {
-                    shadow: true,
+                    shadow: false,
                     translate: ['-120%', 0, -500],
-                    opacity: 0.3,
+                    opacity: 0,
                   },
                   next: {
                     translate: ['120%', 0, -500],
-                    opacity: 0.3,
+                    opacity: 0,
                   },
                 }}
                 autoplay={{
@@ -269,7 +278,8 @@ const HomePage = () => {
           ) : null}
 
           {/* --- SECTION VRAIES VIDÉOS YOUTUBE --- */}
-          <div className="mt-12 grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto px-4">
+          <div className="">
+            <div className="mt-12 grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto px-4">
               <div className="flex flex-col gap-3">
                 <div className="relative aspect-video rounded-2xl overflow-hidden border-4 border-white/10 shadow-2xl group transition-all hover:border-red-600">
                   <iframe className="w-full h-full" src="https://www.youtube.com/embed/Q4xqchvM9pI?list=RDQ4xqchvM9pI" title="SHUKRANI" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"></iframe>
@@ -299,7 +309,11 @@ const HomePage = () => {
                   </div>
                 </div>
               </div>
+            </div>
+              
           </div>
+
+          
         </div>
       </section>
 

@@ -92,7 +92,7 @@ export default function PostVideoPage() {
   };
 
   return (
-    <div className="p-10 max-w-lg mx-auto border rounded-xl shadow-lg bg-white mt-10">
+    <div className="p-10 max-w-lg mx-auto border rounded-xl shadow-lg bg-white mt-0">
       <h1 className="text-2xl font-bold mb-6 text-gray-800">Publier une vidéo HD</h1>
       
       <div className="mb-4">

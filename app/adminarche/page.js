@@ -33,7 +33,8 @@ export default function AdminDashboard() {
   
     // Utilisation d'une variable d'env (comparaison côté client ici pour la simplicité, 
     // mais idéalement via une route API pour la sécurité maximale)
-    const secret = process.env.ARCHE_PUBLIC_ACCESS_CODE;
+    const secret = process.env.NEXT_PUBLIC_ARCHE_ACCESS_CODE;
+    
   
     if (accessCode === secret) {
       setIsAuthorized(true);
@@ -116,7 +117,7 @@ export default function AdminDashboard() {
           </nav>
 
           {/* CONTENU PRINCIPAL */}
-          <main className="col-md-9 ms-sm-auto col-lg-10 px-md-4 bg-light min-vh-100 pt-3">
+          <main className="col-md-9 ms-sm-auto col-lg-10 px-4 pt-4 bg-light min-vh-100">
             <div className="d-none d-md-flex justify-content-between align-items-center pb-3 mb-4 border-bottom">
               <h1 className="h4 fw-bold text-dark m-0">
                 {activeTab === "videos" && "Publication Vidéo HD"}
@@ -220,13 +221,13 @@ export default function AdminDashboard() {
       </div>
       
       :
-      <div className="fixed inset-0 z-[200] flex items-center justify-center bg-black text-white p-4">
-        <div className="w-full max-w-md p-8 bg-[#121212] border border-white/10 rounded-[32px] shadow-2xl text-center">
+      <div className="fixed inset-0 z-[200] flex items-center justify-center bg-white text-white p-4">
+        <div className="bg-white w-full max-w-md p-8 bg-[#121212] border border-white/10 rounded-[32px] shadow-2xl text-center">
           <div className="inline-flex p-4 bg-purple-600/20 rounded-full mb-6 text-purple-500">
             <Lock size={40} />
           </div>
           
-          <h1 className="text-2xl font-black mb-2 uppercase tracking-tight">Accès Restreint</h1>
+          <h1 className="text-black font-black mb-2 uppercase tracking-tight">Accès Restreint</h1>
           <p className="text-gray-400 mb-8 text-sm">Veuillez saisir le code d'accès de la Chorale pour continuer.</p>
 
           <form onSubmit={handleSubmit} className="space-y-4">
@@ -236,7 +237,7 @@ export default function AdminDashboard() {
                 placeholder="Code secret"
                 value={accessCode}
                 onChange={(e) => setAccessCode(e.target.value)}
-                className="w-full bg-white/5 border border-white/10 p-4 rounded-2xl outline-none focus:ring-2 focus:ring-purple-500 transition-all text-center text-xl tracking-widest"
+                className="w-full bg-black border border-black p-2 rounded-2xl outline-none focus:ring-2 focus:ring-purple-500 transition-all text-center text-xl tracking-widest"
                 autoFocus
               />
             </div>
@@ -251,16 +252,12 @@ export default function AdminDashboard() {
             <button
               type="submit"
               disabled={loading}
-              className="w-full bg-purple-600 hover:bg-purple-700 disabled:bg-gray-700 text-white font-bold py-4 rounded-2xl transition-all shadow-lg shadow-purple-900/20 flex items-center justify-center gap-2"
+              className="rounded-4 w-full bg-purple-600 hover:bg-purple-700 disabled:bg-gray-700 text-white font-bold py-3 rounded-2xl transition-all shadow-lg shadow-purple-900/20 flex items-center justify-center gap-2"
             >
               {loading ? <Loader2 className="animate-spin" /> : <Unlock size={20} />}
               Débloquer l'accès
             </button>
           </form>
-
-          <p className="mt-8 text-[10px] text-gray-600 uppercase tracking-widest font-bold">
-            ArchePlay Admin System
-          </p>
         </div>
       </div>
       }
