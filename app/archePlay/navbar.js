@@ -34,7 +34,7 @@ const NavbarArchePlay = () => {
           {['Accueil', 'pupitres', 'galerie'].map((item) => (
             <a 
               key={item} 
-              href={`#${item.toLowerCase()}`} 
+              href={`/#${item.toLowerCase()}`} 
               className="text-gray-300 hover:text-white transition-colors"
             >
               {item}
