@@ -21,7 +21,7 @@ const ActionModal = ({ isOpen, onClose, title, children }) => {
         </div>
         <button 
           onClick={onClose}
-          className="mt-8 text-sm font-medium text-gray-500 hover:text-white transition-colors uppercase tracking-widest"
+          className="mt-4 text-sm font-medium text-gray-500 hover:text-white transition-colors uppercase tracking-widest"
         >
           Annuler
         </button>
@@ -105,18 +105,14 @@ const VideoCard = ({ video, isTarget }) => {
         onClose={() => setModalType(null)}
         title="Sur quelle plateforme voulez-vous liker ?"
       >
-        <button 
-          onClick={() => goToLike('fb')}
-          className="flex items-center justify-center gap-4 bg-[#1877F2] hover:bg-[#166fe5] p-5 rounded-2xl text-white font-bold transition-transform active:scale-95"
-        >
-          <Facebook fill="white" size={24} /> Facebook
-        </button>
-        <button 
-          onClick={() => goToLike('yt')}
-          className="flex items-center justify-center gap-4 bg-[#FF0000] hover:bg-[#e60000] p-5 rounded-2xl text-white font-bold transition-transform active:scale-95"
-        >
-          <Youtube fill="white" size={24} /> YouTube
-        </button>
+        <div className="mt-12 grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto px-4">
+          <button onClick={() => goToLike('fb')}>
+            <Facebook fill="white" size={38} className="flex items-center justify-center gap-4 bg-[#1877F2] hover:bg-[#166fe5] p-2 rounded-2xl text-white font-bold transition-transform active:scale-95" />
+          </button>
+          <button onClick={() => goToLike('yt')}>
+            <Youtube fill="red" size={38} className="flex items-center justify-center gap-4 bg-[#1877F2] hover:bg-[#166fe5] p-2 rounded-2xl text-white font-bold transition-transform active:scale-95" />
+          </button>
+        </div>
       </ActionModal>
 
       {/* OVERLAY INTERFACE */}
