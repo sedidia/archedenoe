@@ -76,19 +76,19 @@ const HomePage = () => {
       
       {/* --- HEADER --- */}
       <header className="relative h-screen w-full flex items-center overflow-hidden bg-black font-serif transition-colors duration-1000">
-            <nav className={`fixed top-0 w-full z-[100] transition-all duration-500 font-sans ${isScrolled || isMenuOpen ? 'bg-black/95 backdrop-blur-xl py-4' : 'bg-transparent py-6 md:py-8'}`}>
+            <nav className={`p-4  fixed top-0 w-full z-[100] transition-all duration-500 font-sans ${isScrolled || isMenuOpen ? 'bg-black/95 backdrop-blur-xl py-4' : 'bg-transparent py-6 md:py-8'}`}>
               <div className="container mx-auto px-6 md:px-20 flex justify-between items-center relative z-[160]">
                 <Link href="/" className="text-white flex items-center gap-2 no-underline">
                   <div className={`w-8 h-8 md:w-10 md:h-10 ${current.accent} rounded-full transition-colors duration-1000 flex items-center justify-center font-black text-white text-sm md:text-base`}>C</div>
                   <span className="text-xl md:text-2xl font-black tracking-tighter uppercase italic">Arche de Noé</span>
                 </Link>
-                <div className="hidden lg:flex items-center gap-10 text-xs font-bold uppercase tracking-[0.2em] text-white/80">
+                <div className="hidden lg:flex items-center gap-10 text-xs font-bold uppercase tracking-[0.2em] text-white/100">
                   {['Accueil', 'Galerie', 'Concerts', 'A propos'].map((item) => (
-                    <Link key={item} href={`#${formatTag(item)}`} className="hover:text-white transition-colors">{item}</Link>
+                    <Link key={item} href={`#${formatTag(item)}`} className="text-white hover:text-white transition-colors">{item}</Link>
                   ))}
                 </div>
                 <div className="flex items-center gap-4">
-                  <a href={WHATSAPP_URL} target="_blank" className={`hidden sm:block px-6 py-2 rounded-full border border-white/30 text-[10px] md:text-xs font-bold uppercase tracking-widest text-white hover:bg-white hover:text-black transition-all duration-300 ${current.borderAccent}`}>Nous Contacter</a>
+                  <a href={WHATSAPP_URL} target="_blank" className={`hidden sm:block px-6 py-2 rounded-full border border-white/30 text-[10px] md:text-xs font-bold uppercase tracking-widest text-black bg-white hover:bg-red hover:text-black transition-all duration-300 ${current.borderAccent}`}>Nous Contacter</a>
                   <button onClick={() => setIsMenuOpen(!isMenuOpen)} className="p-2 text-white lg:hidden">
                     <div className="w-6 h-5 relative flex flex-col justify-between">
                       <span className={`w-full h-0.5 bg-white transition-all duration-300 ${isMenuOpen ? 'rotate-45 translate-y-2' : ''}`} />
@@ -114,15 +114,15 @@ const HomePage = () => {
             </div>
 
             {/* LOGOS RÉSEAUX SOCIAUX À DROITE (Vertical Bas -> Haut) */}
-            <div className="absolute right-6 md:right-12 bottom-12 z-30 flex flex-col-reverse gap-8 items-center">
-              <div className="w-px h-24 bg-gradient-to-t from-white/50 to-transparent"></div>
-              <a href="https://www.youtube.com/@choralearchedenoe?si=x1iRCIrwonpd2Bc4" className="text-white/60 hover:text-white transition-all hover:-translate-y-1"><i className="fab fa-youtube text-xl"></i></a>
+            <div className="absolute bottom-5 right-6 md:right-12 z-30 flex flex-col-reverse gap-3 items-center">
               <a href="https://www.tiktok.com/@chorale.arche.de3?_r=1&_t=ZN-94U0FVRW2E6" className="text-white/60 hover:text-white transition-all hover:-translate-y-1"><i className="fab fa-tiktok text-xl"></i></a>
+              <a href="https://www.youtube.com/@choralearchedenoe?si=x1iRCIrwonpd2Bc4" className="text-white/60 hover:text-white transition-all hover:-translate-y-1"><i className="fab fa-youtube text-xl"></i></a>
               <a href="https://web.facebook.com/profile.php?id=61588220311478&rdid=cGjXnv2JnRjT7pJ2&share_url=https%3A%2F%2Fweb.facebook.com%2Fshare%2F1cAMnuMgTz%2F%3F_rdc%3D1%26_rdr#" className="text-white/60 hover:text-white transition-all hover:-translate-y-1"><i className="fab fa-facebook-f text-xl"></i></a>
-              <span className="text-[10px] font-bold tracking-[0.5em] uppercase text-white/30 rotate-180 [writing-mode:vertical-lr] mb-4">Follow us</span>
+              {/* <div className="w-px h-24 bg-gradient-to-t from-white/100 to-transparent"></div> */}
+              <span className="text-[20px] font-bold tracking-[0.5em] uppercase text-white/30 rotate-180 [writing-mode:vertical-lr] mb-4">ADN</span>
             </div>
 
-            <div className="container relative z-20 px-6 md:px-20 lg:px-32">
+            <div className="p-4 container relative z-20 px-6 md:px-20 lg:px-32">
               <div className={`transition-all duration-1000 ${isAnimating ? 'opacity-0 translate-x-10' : 'opacity-100 translate-x-0'}`}>
                 <span className={`${current.textAccent} font-sans font-bold tracking-[0.3em] uppercase text-[10px] md:text-sm mb-4 block`}>Arche de Noé présente</span>
                 <h1 className="text-5xl md:text-8xl font-light text-white leading-tight mb-4 tracking-tight">
@@ -137,7 +137,7 @@ const HomePage = () => {
               </div>
             </div>
             <div className="absolute top-0 left-0 w-full h-1 z-[90] bg-white/10">
-              <div className={`h-full ${current.accent} transition-all duration-[6000ms] ease-linear`} style={{ width: isAnimating ? '0%' : '100%' }} key={index} />
+              <div className={`p-5 h-full ${current.accent} transition-all duration-[6000ms] ease-linear`} style={{ width: isAnimating ? '0%' : '100%' }} key={index} />
             </div>
       </header>
 
@@ -218,8 +218,7 @@ const HomePage = () => {
               pagination={{ clickable: true }}
               className="pb-20"
             >
-
-              // À la ligne 217, ajoute une sécurité supplémentaire :
+              
               {Array.isArray(moments) && moments.map((moment) => (
                 <SwiperSlide key={moment._id} className="max-w-[320px] md:max-w-[600px]">
                   <div className="relative group overflow-hidden bg-slate-200 aspect-[4/5] md:aspect-video border-[12px] border-white shadow-2xl">
@@ -253,8 +252,8 @@ const HomePage = () => {
       </section>
 
       {/* --- RÉÉCRITURE SECTION A PROPOS (Design Épuré & Impactant) --- */}
-      <section id="apropos" className="py-32 bg-white relative">
-        <div className="container px-6">
+      <section id="apropos" className="py-32 p-5 bg-white relative">
+        <div className="container">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 items-center">
             <div className="lg:col-span-6 relative">
               <div className="aspect-[3/4] md:aspect-video overflow-hidden shadow-2xl">
@@ -273,7 +272,7 @@ const HomePage = () => {
                 L'Âme de notre <br/> <span className="text-red-600">Ministère</span>
               </h2>
               <p className="text-lg text-slate-600 font-medium leading-relaxed mb-10 border-l-4 border-slate-100 pl-8 italic">
-                "Depuis 2014, nous sculptons l'excellence vocale à Lubumbashi, transformant chaque répétition en un sanctuaire d'harmonie."
+                "Depuis 2013, nous sculptons l'excellence vocale à Lubumbashi, transformant chaque répétition en un sanctuaire d'harmonie."
               </p>
               
               <div className="space-y-8">
@@ -303,7 +302,7 @@ const HomePage = () => {
       </section>
 
       {/* --- RÉÉCRITURE FOOTER (Élégant & Structuré) --- */}
-      <footer id="contact" className="bg-slate-950 text-white pt-32 pb-12 overflow-hidden relative">
+      <footer id="contact" className="px-4 bg-slate-950 text-white pt-32 pb-12 overflow-hidden relative">
         <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-white/20 to-transparent"></div>
         <div className="container grid grid-cols-1 md:grid-cols-12 gap-16 relative z-10 px-6">
           
@@ -356,20 +355,20 @@ const HomePage = () => {
 
           <div className="md:col-span-3">
             <h4 className="text-xs font-black uppercase tracking-[0.3em] text-red-600 mb-8">Liturgie Vocale</h4>
-            <ul className="space-y-4">
-              <li className="flex justify-between border-b border-white/5 pb-2 uppercase text-[11px] font-bold">
-                <span className="text-slate-500">Mardi & Jeudi</span>
-                <span className="text-white">17:50 — 19:00</span>
-              </li>
-              <li className="flex justify-between border-b border-white/5 pb-2 uppercase text-[11px] font-bold">
-                <span className="text-slate-500">Samedi</span>
-                <span className="text-white">18:00 — 19:00</span>
-              </li>
-              <li className="flex justify-between border-b border-white/5 pb-2 uppercase text-[11px] font-bold">
-                <span className="text-slate-500">Dimanche</span>
-                <span className="text-white text-right italic text-red-500">Service Dominical</span>
-              </li>
-            </ul>
+            <div className="space-y-4">
+              <div>
+                <div className="text-slate-500">Mardi & Jeudi</div>
+                <div className="text-white ml-4">17:50 — 19:00</div>
+              </div>
+              <div>
+                <div className="text-slate-500">Samedi</div>
+                <div className="text-white ml-4">18:00 — 19:00</div>
+              </div>
+              <div>
+                <div className="text-slate-500">Dimanche</div>
+                <div className="text-white ml-4 italic text-red-500">Service Dominical</div>
+              </div>
+            </div>
           </div>
 
           <div className="md:col-span-4">
@@ -390,8 +389,8 @@ const HomePage = () => {
         <div className="container mt-32 pt-10 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-6 text-[10px] font-bold uppercase tracking-[0.4em] text-slate-600 px-6">
           <p>© 2026 ARCHE DE NOÉ CHORALE. TOUS DROITS RÉSERVÉS.</p>
           <div className="flex gap-8">
-            <a href="#" className="hover:text-white transition-colors">Mentions Légales</a>
-            <a href="#" className="hover:text-white transition-colors">Politique de Confidentialité</a>
+            <a href="conditionsutilisations" className="hover:text-white transition-colors">Conditions d'utilisations</a>
+            <a href="reglesdeconfidentialitepubauutilisateurs" className="hover:text-white transition-colors">Politique de Confidentialité</a>
           </div>
         </div>
       </footer>

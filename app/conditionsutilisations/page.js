@@ -13,7 +13,7 @@ const ConditionsUtilisation = () => {
       <section className="mb-8">
         <h2 className="text-xl font-semibold mb-3">1. Objet de l'application</h2>
         <p>
-          Cette application est destinée aux membres de la chorale <strong>[Nom de votre Chorale]</strong>. 
+          Cette application est destinée aux membres de la chorale <strong>Arche de Noé</strong>. 
           Elle a pour but de faciliter la communication, le partage des partitions, des fichiers audio de répétition 
           et la gestion du calendrier des événements.
         </p>
@@ -62,7 +62,7 @@ const ConditionsUtilisation = () => {
       </section>
 
       <footer className="mt-12 pt-6 border-t text-center text-gray-500">
-        <p>Pour toute question : <a href="mailto:contact@votrechorale.com" className="text-indigo-600 underline">contact@votrechorale.com</a></p>
+        <p>Pour toute question : <a href="https://wa.me/243990123278?text=Conditions Générales d'Utilisation" className="text-indigo-600 underline">Contactez-nous par Whatsapp</a></p>
       </footer>
     </div>
   );
