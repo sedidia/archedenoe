@@ -54,9 +54,13 @@ const HomePage = () => {
     }, 6000);
     
     fetch('/api/moments').then(res => res.json()).then(result => {
-      setMoments(result.data || result);
+      const data = Array.isArray(result) ? result : (result.data || []);
+      setMoments(data);
       setLoading(false);
-    }).catch(() => setLoading(false));
+    }).catch(() => {
+      setMoments([]); // Sécurité en cas d'erreur
+      setLoading(false);
+    });
 
     return () => {
       window.removeEventListener('scroll', handleScroll);
@@ -214,7 +218,9 @@ const HomePage = () => {
               pagination={{ clickable: true }}
               className="pb-20"
             >
-              {moments.map((moment) => (
+
+              // À la ligne 217, ajoute une sécurité supplémentaire :
+              {Array.isArray(moments) && moments.map((moment) => (
                 <SwiperSlide key={moment._id} className="max-w-[320px] md:max-w-[600px]">
                   <div className="relative group overflow-hidden bg-slate-200 aspect-[4/5] md:aspect-video border-[12px] border-white shadow-2xl">
                     <img src={moment.imageUrl || "https://images.unsplash.com/photo-1514320298574-255903965a45"} alt="" className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700 scale-105 group-hover:scale-100" />
@@ -253,7 +259,7 @@ const HomePage = () => {
             <div className="lg:col-span-6 relative">
               <div className="aspect-[3/4] md:aspect-video overflow-hidden shadow-2xl">
                 <img 
-                  src="https://res.cloudinary.com/archedenoe/image/upload/v1771359032/samples/cup-on-a-table.jpg" 
+                  src="https://res.cloudinary.com/archedenoe/image/upload/v1771585800/moment_posters/gy9ctd4na3lwudxxxdh2.jpg" 
                   className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-[1.5s] ease-in-out" 
                   alt="L'Arche de Noé en répétition" 
                 />
@@ -373,10 +379,10 @@ const HomePage = () => {
                 <p className="text-[10px] text-slate-500 uppercase font-black tracking-widest mb-1">Siège social</p>
                 <p className="font-bold text-lg">Paroisse La Sentinelle, Lubumbashi</p>
               </div>
-              <div>
+              {/* <div>
                 <p className="text-[10px] text-slate-500 uppercase font-black tracking-widest mb-1">E-mail</p>
                 <p className="font-bold text-lg hover:text-red-500 transition-colors cursor-pointer underline decoration-red-600/30">contact@archedenoe.cd</p>
-              </div>
+              </div> */}
             </div>
           </div>
         </div>
@@ -427,15 +433,15 @@ const HomePage = () => {
 
               <div className="mt-12 pt-10 border-t border-slate-100 grid grid-cols-3 gap-8">
                  <div className="text-center">
-                    <p className="text-3xl font-black text-slate-900 font-serif italic">80+</p>
+                    <p className="text-3xl font-black text-slate-900 font-serif italic">50+</p>
                     <p className="text-[10px] uppercase font-bold text-slate-400 tracking-widest">Chantres</p>
                  </div>
                  <div className="text-center border-x border-slate-100">
-                    <p className="text-3xl font-black text-slate-900 font-serif italic">12</p>
+                    <p className="text-3xl font-black text-slate-900 font-serif italic">13</p>
                     <p className="text-[10px] uppercase font-bold text-slate-400 tracking-widest">Ans d'Histoire</p>
                  </div>
                  <div className="text-center">
-                    <p className="text-3xl font-black text-slate-900 font-serif italic">300+</p>
+                    <p className="text-3xl font-black text-slate-900 font-serif italic">100+</p>
                     <p className="text-[10px] uppercase font-bold text-slate-400 tracking-widest">Concerts</p>
                  </div>
               </div>
